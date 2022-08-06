@@ -385,8 +385,44 @@ void selectionsort(std::vector<std::pair<int, int> > &arr){
         arr[i].second = SORTED;
     }
 }
-
+int varcounter = 0;
 void insertionsort(std::vector<std::pair<int, int> > &arr){
+    bool swapped;
+    int endpt = numOfColumn;
+    do
+    {
+    for(int i = 1; i < numOfColumn; i++){
+        swapped = false;
+        varcounter = i;
+        arr[i].second = LOCALMINUM;
+        if (arr[varcounter].first < arr[varcounter-1].first){
+            do
+            {
+                std::swap(arr[varcounter], arr[varcounter-1]);
+                swapped = true;
+                if (varcounter != 0)
+                    varcounter--;
+            } while (arr[varcounter].first < arr[varcounter-1].first);
+        
+        }
+            BeginDrawing();
+
+            ClearBackground(BLUE);
+
+            for(int k = numOfColumn - 1; k>= endpt; k--)
+                arr[k].second = SORTED;
+            
+            drawarr(arr);
+
+            for(int k = i; k>= 0; k--)
+                arr[k].second = NORMAL;
+            EndDrawing();
+    }   
+    } while (swapped);
+
+    for (int i = numOfColumn - 1; i>= 0; i--){
+        arr[i].second = SORTED;
+    }
 
 }
 
