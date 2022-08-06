@@ -1,2 +1,2 @@
 # sortingAlgorithmVisualizer
-Implements different sorting algorithms and visualizes them. 
+Uses c++ and Raylib to visualize different sorting algorithms. Organized by the time complexities
