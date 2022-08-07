@@ -550,8 +550,67 @@ void mergesort(std::vector<std::pair<int, int> >& arr, int min, int max){
     }
 }
 
-void quicksort(std::vector<std::pair<int, int> > &arr){
+int itemFromLeft = 0;
 
+void quick(std::vector<std::pair<int, int> >& arr, int L, int R,  int pivot){
+    bool swapped;
+    int endpt= numOfColumn;
+    do
+    {
+        swapped = false;
+        while(L <= R){
+        arr[L].second=LOCALMINUM;
+        while(arr[L].first < arr[pivot].first){
+            
+            L++;
+
+        }
+        
+        while(arr[R].first > arr[pivot].first){
+            R--;
+
+        }
+
+        if(L <= R){
+            std::swap(arr[L], arr[R]);
+            swapped = true;
+            L++;
+            R--;
+            BeginDrawing();
+
+            ClearBackground(BLUE);
+
+            for(int k = numOfColumn - 1; k>= endpt; k--)
+                arr[k].second = SORTED;
+            
+            drawarr(arr);
+
+            for(int k = L; k>= 0; k--)
+                arr[k].second = NORMAL;
+            EndDrawing();
+        } 
+        }
+        itemFromLeft = L;
+    } while (swapped);
+    
+    
+    for (int i = numOfColumn - 1; i>= 0; i--){
+        arr[i].second = SORTED;
+    } 
+
+}
+
+void quickSort(std::vector<std::pair<int, int> >& arr, int L, int R){
+    if (L >= R){
+        return;
+    }
+    else {
+    int pivotPoint = (L + R)/2;
+    quick(arr, L, R, pivotPoint);
+    int index = itemFromLeft;
+    quickSort(arr, L, index-1);
+    quickSort(arr, index, R);
+    }
 }
 
 void heapsort(std::vector<std::pair<int, int> > &arr){
@@ -590,7 +649,7 @@ void whichSort(int x, int y) {
             drawarr(arr);
         }
         if (y== 1){
-            quicksort(arr);
+            quickSort(arr, 0, numOfColumn-1);
             drawarr(arr);
         }
         if ( y== 2){
