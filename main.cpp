@@ -59,6 +59,10 @@ void nLogNsortOptions();
 void hybridSortOptions();
 void complexityChoice();
 
+void mergesort(std::vector<std::pair<int, int> >& arr, int min, int max);
+void merge(std::vector<std::pair<int, int> >& arr, int min, int mid, int max);
+
+
 
 
 void drawarr(std::vector<std::pair<int, int> > arr) {
@@ -428,8 +432,122 @@ void insertionsort(std::vector<std::pair<int, int> > &arr){
 
 //nlogn
 
-void mergesort(std::vector<std::pair<int, int> > &arr){
+void merge(std::vector<std::pair<int, int> >& arr, int min, int mid, int max){
+    
+    int lWalk = min;
+    int copyWalk = min;
+    int rWalk = mid +1;
+    int endpt = numOfColumn;
 
+    int lEnd = (mid+max)/2;
+    int rBeg = lEnd +1;
+
+    bool swapped;
+    std::vector<std::pair<int, int> > arrCopy = arr;
+
+    do
+    {
+    swapped = false;
+    while(lWalk <= mid && rWalk<=max){
+        if(arr[lWalk].first < arr[rWalk].first){
+             arrCopy[copyWalk] = arr[lWalk];
+             lWalk++;
+             copyWalk++;
+             swapped =true;
+            BeginDrawing();
+
+            ClearBackground(BLUE);
+
+            for(int k = numOfColumn - 1; k>= endpt; k--)
+                arr[k].second = SORTED;
+            
+            drawarr(arr);
+
+            for(int k = lWalk; k>= 0; k--)
+                arr[k].second = NORMAL;
+            EndDrawing();
+        } else{
+            arrCopy[copyWalk] = arr[rWalk];
+            rWalk++;
+            copyWalk++;
+            swapped =true;
+            BeginDrawing();
+
+            ClearBackground(BLUE);
+
+            for(int k = numOfColumn - 1; k>= endpt; k--)
+                arr[k].second = SORTED;
+            
+            drawarr(arr);
+
+            for(int k = rWalk; k>= 0; k--)
+                arr[k].second = NORMAL;
+            EndDrawing();
+        }
+        
+    }
+
+    while (lWalk <= mid){
+        arrCopy[copyWalk] = arr[lWalk];
+        lWalk++;
+        copyWalk++;
+        swapped =true;
+            BeginDrawing();
+
+            ClearBackground(BLUE);
+
+            for(int k = numOfColumn - 1; k>= endpt; k--)
+                arr[k].second = SORTED;
+            
+            drawarr(arr);
+
+            for(int k = lWalk; k>= 0; k--)
+                arr[k].second = NORMAL;
+            EndDrawing();
+    }
+
+    while (rWalk <= max){
+        arrCopy[copyWalk] = arr[rWalk];
+        rWalk++;
+        copyWalk++;
+        swapped =true;
+            BeginDrawing();
+
+            ClearBackground(BLUE);
+
+            for(int k = numOfColumn - 1; k>= endpt; k--)
+                arr[k].second = SORTED;
+            
+            drawarr(arr);
+
+            for(int k = rWalk; k>= 0; k--)
+                arr[k].second = NORMAL;
+            EndDrawing();
+    }
+
+    for(int i = 0; i < arrCopy.size(); i++) {
+        arr[i] = arrCopy[i];
+    }
+
+
+    } while (swapped);
+    
+
+
+    for (int i = numOfColumn - 1; i>= 0; i--){
+        arr[i].second = SORTED;
+    }
+
+}
+
+
+void mergesort(std::vector<std::pair<int, int> >& arr, int min, int max){
+    if(min < max) {
+        int midPoint = (min + max)/2;
+        mergesort(arr, min, midPoint);
+        mergesort(arr, midPoint + 1, max);
+        merge(arr, min, midPoint, max);
+    }
 }
 
 void quicksort(std::vector<std::pair<int, int> > &arr){
@@ -468,7 +586,7 @@ void whichSort(int x, int y) {
 
     if(x == 1){
         if(y == 0){
-            mergesort(arr);
+            mergesort(arr, 0, numOfColumn-1);
             drawarr(arr);
         }
         if (y== 1){

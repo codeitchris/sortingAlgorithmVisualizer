@@ -6,8 +6,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
+make: *** No rule to make target `all'.  Stop.
 
-# Make data base, printed on Fri Aug  5 17:02:16 2022
+
+# Make data base, printed on Sat Aug  6 17:30:27 2022
 
 # Variables
 
@@ -38,7 +41,7 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/3f/mf8lz2cj7dn8s2lp755g2cgm0000gn/T/vscode-ipc-61744b93-582a-4960-be49-a481cb036e93.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/3f/mf8lz2cj7dn8s2lp755g2cgm0000gn/T/vscode-ipc-51cbd232-d3ba-48c0-9822-28b86a7c830f.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -146,7 +149,7 @@ MAKELEVEL := 0
 # environment
 CONDA_PREFIX = /Users/christophersebastian/opt/anaconda3
 # environment
-VSCODE_PID = 42282
+VSCODE_PID = 62798
 # environment
 _CE_CONDA = 
 # environment
@@ -209,9 +212,6 @@ default:
 #  File has not been updated.
 
 # files hash-table stats:
- 
-make: *** No rule to make target `all'.  Stop.
-
 # Load=5/1024=0%, Rehash=0, Collisions=0/17=0%
 # VPATH Search Paths
 
@@ -224,6 +224,6 @@ make: *** No rule to make target `all'.  Stop.
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Aug  5 17:02:16 2022
+# Finished Make data base on Sat Aug  6 17:30:27 2022
 
  
