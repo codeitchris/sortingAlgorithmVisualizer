@@ -56,11 +56,15 @@ void speedFunction(char operation, int &value);
 void endScreen();
 void nSquaredSortOptions();
 void nLogNsortOptions();
-void hybridSortOptions();
 void complexityChoice();
+
 
 void mergesort(std::vector<std::pair<int, int> >& arr, int min, int max);
 void merge(std::vector<std::pair<int, int> >& arr, int min, int mid, int max);
+
+void heapSort(std::vector<std::pair<int, int> >& arr, int n);
+void heapify(std::vector<std::pair<int, int> >& arr, int n, int counter);
+void maxHeap(std::vector<std::pair<int, int> >& arr, int n);
 
 
 
@@ -95,13 +99,10 @@ bool insertionSortbool = false;
 bool mergeSortbool = false;
 bool quickSortbool = false;
 bool heapSortbool = false;
-bool timSortbool = false;
-bool introSortbool = false;
 bool nsquaredsortoptionbool = false;
 bool nlognsortotionbool = false;
-bool hybridbool = false; 
 bool openerButtonPressed = false;
-
+bool backButtonPressed = false;
 
 
 
@@ -112,7 +113,9 @@ void opener(){
     float tmp = MeasureText(opening_text, font)/2;
     openerbutton(tmp, opening_text);
     
-    
+    char backButton[] = "back to start";
+    float tmp2 = MeasureText(backButton, font)/2;
+    button(GetScreenWidth()/10 - tmp2, GetScreenHeight()/30, backButton, DARKGRAY, backButtonPressed);    
     drawarr(arr);
 }
 void openerbutton(float size, char Bubble_Sort_text[]){
@@ -158,7 +161,7 @@ void button(float x, float y, char *Text, Color color, bool &state){
 void RNDarr(std::vector<std::pair<int, int> >& arr) {
     
     for(int i =0; i<numOfColumn; i++)
-        arr[i] = {GetRandomValue(40,MinWindowHeight - 80), NORMAL};
+        arr[i] = {GetRandomValue(40,MinWindowWidth - 30), NORMAL};
     
     
     shouldRND = false;
@@ -613,19 +616,80 @@ void quickSort(std::vector<std::pair<int, int> >& arr, int L, int R){
     }
 }
 
-void heapsort(std::vector<std::pair<int, int> > &arr){
+void heapSort(std::vector<std::pair<int, int> >& arr, int n){
+    int endingPoint = numOfColumn;
+    bool swapped;
+
+    maxHeap(arr, n);
+    do
+    {
+        swapped = false;
+        for(int i = n-1; i >=0; i--){
+        arr[0].second = LOCALMINUM;
+        std::swap(arr[0], arr[i]);
+        heapify(arr,i,0);
+
+            BeginDrawing();
+
+            ClearBackground(BLUE);
+
+            for(int k = numOfColumn - 1; k>= endingPoint; k--)
+                arr[k].second = SORTED;
+            
+            drawarr(arr);
+
+            for(int k = i; k>= 0; k--)
+                arr[k].second = NORMAL;
+            EndDrawing();
+    }
+    } while (swapped);
+    
+    for (int i = 0; i<= numOfColumn - 1; i++){
+        SetTargetFPS(80);
+        arr[i].second = SORTED;
+    } 
 
 }
 
-//hybrid
+void heapify(std::vector<std::pair<int, int> >& arr, int n, int counter){
+    int left = 2*counter + 1;
+    int right = 2*counter + 2;
+    int max = counter;
+    
 
-void timsort(std::vector<std::pair<int, int> > &arr){
+
+            
+    if(left < n && arr[left].first > arr[counter].first){
+        max = left;
+        //arr[max].second = SELECTED;
+    }
+        
+    
+    if(right < n && arr[right].first > arr[max].first){
+        max = right;
+        //arr[max].second = SELECTED;
+    }
+        
+    
+    if(max != counter){
+        arr[max].second = SELECTED;
+        std::swap(arr[counter], arr[max]);
+        heapify(arr, n, max);
+    }
+    
+     
+        
+
 
 }
 
-void introsort(std::vector<std::pair<int, int> > &arr){
+void maxHeap(std::vector<std::pair<int, int> >& arr, int n){
+    for(int k = n/2 - 1; k >= 0; k--){
+        heapify(arr, n, k);
+    }
 
 }
+
 
 void whichSort(int x, int y) {
     if(x == 0){
@@ -653,22 +717,10 @@ void whichSort(int x, int y) {
             drawarr(arr);
         }
         if ( y== 2){
-            heapsort(arr);
+            heapSort(arr, numOfColumn);
             drawarr(arr);
         }
     }
-
-    if(x == 2){
-        if(y == 0){
-            timsort(arr);
-            drawarr(arr);
-        }
-        if (y== 1){
-            introsort(arr);
-            drawarr(arr);
-        }
-    }
-    
 
     
 }
@@ -687,7 +739,7 @@ int typeSortcounter = 0;
 
 bool nSquaredComplexity = false;
 bool nlognComplexity = false;
-bool hybridcomplexity = false;
+
 
 
 
@@ -696,31 +748,24 @@ void complexityChoice() {
     float font = (2.5*GetScreenWidth())/100;
 
     char nSquaredText[] = "n-Squared";
-    float tmp=(27.0*GetScreenWidth())/100;
-    button(tmp, GetScreenHeight()/20 + font*2, nSquaredText, DARKGRAY, nSquaredComplexity);
+    float tmp=(30.0*GetScreenWidth())/100;
+    button(tmp, GetScreenHeight()/23 + font*2, nSquaredText, DARKGRAY, nSquaredComplexity);
 
     if(nSquaredComplexity){
         typeSortcounter = 0;
         return;
     }
 
-    tmp+= MeasureText(nSquaredText, font) + 100;
+    tmp+= MeasureText(nSquaredText, font) + 225;
     char nlogntext[] = "nLog(n)";
-    button(tmp, GetScreenHeight()/20 + font*2, nlogntext, DARKGRAY, nlognComplexity);
+    button(tmp, GetScreenHeight()/23 + font*2, nlogntext, DARKGRAY, nlognComplexity);
 
     if(nlognComplexity){
         typeSortcounter = 1;
         return;
     }
 
-    tmp+= MeasureText(nlogntext, font) + 100;
-    char hybridtext[] = "hybrid";
-    button(tmp, GetScreenHeight()/20 + font*2, hybridtext, DARKGRAY, hybridcomplexity);
 
-    if(hybridcomplexity){
-        typeSortcounter = 2;
-        return;
-    }
 }
 
 
@@ -729,7 +774,7 @@ int sortCount = 0;
 
 void nSquaredSortOptions() {
     float font = (2.5*GetScreenWidth())/100;
-    float tmp = (15.0*GetScreenWidth())/100;
+    float tmp = (20.0*GetScreenWidth())/100;
 
 
     char bubblesortText[] = "bubble sort";
@@ -764,25 +809,25 @@ void nLogNsortOptions(){
     float tmp=(20.0*GetScreenWidth())/100;
     
     char mergeSortText[] = "merge sort";
-    button(tmp, GetScreenHeight()/20 + font*2, mergeSortText, DARKGRAY, mergeSortbool);
+    button(tmp, GetScreenHeight()/15 + font*2, mergeSortText, DARKGRAY, mergeSortbool);
     if(mergeSortbool){
         sortCount = 0;
         return;
     }
 
 
-    tmp+= MeasureText(mergeSortText, font) + 80;
+    tmp+= MeasureText(mergeSortText, font) + 125;
     char quickSortText[] = "quick sort";
-    button(tmp, GetScreenHeight()/20 + font*2, quickSortText, DARKGRAY, quickSortbool);
+    button(tmp, GetScreenHeight()/15 + font*2, quickSortText, DARKGRAY, quickSortbool);
     if(selectionSortbool){
         sortCount = 1;
         return;
     }
 
 
-    tmp += MeasureText(quickSortText, font) +  80;
+    tmp += MeasureText(quickSortText, font) +  125;
     char heapSortText[] = "heap sort";
-    button(tmp, GetScreenHeight()/20 + font*2, heapSortText, DARKGRAY, heapSortbool);
+    button(tmp, GetScreenHeight()/15 + font*2, heapSortText, DARKGRAY, heapSortbool);
     if(heapSortbool){
         sortCount = 2;
         return;
@@ -790,26 +835,7 @@ void nLogNsortOptions(){
     
 }
  
-void hybridSortOptions(){
-    float font = (2.5*GetScreenWidth())/100;
-    float tmp=(15.0*GetScreenWidth())/100;
 
-    char timSortText[] = "timsort";
-    button(tmp, GetScreenHeight()/20 + font*2, timSortText, DARKGRAY, timSortbool);
-    if(timSortbool){
-        sortCount = 0;
-        return;
-    }
-
-    tmp += MeasureText(timSortText, font) + 80;
-    char introSortText[] = "introsort";
-    button(tmp, GetScreenHeight()/20 + font*2, introSortText, DARKGRAY, introSortbool);
-    if(introSortbool){
-        sortCount = 1;
-        return;
-    }
-
-}
 
 
 
@@ -829,10 +855,29 @@ int main() {
             opener();
         
         
-        if(openerButtonPressed) 
+        if(openerButtonPressed) {
             complexityChoice();
+        }
+            
         
-        
+        if(backButtonPressed){
+            openerButtonPressed = false;
+            nSquaredComplexity = false;
+            nlognComplexity = false;
+            bubbleSortbool = false;
+            selectionSortbool = false;
+            insertionSortbool = false;
+            mergeSortbool = false;
+            quickSortbool = false;
+            heapSortbool = false;
+            doStartOptions = false;
+            doMenue = false;
+            shldmenue = false;
+            doEnding = false;
+            opener();
+        }
+
+
         if(nSquaredComplexity){
             openerButtonPressed = false;
             nSquaredSortOptions();
@@ -841,10 +886,6 @@ int main() {
             openerButtonPressed = false;
             nLogNsortOptions();
         } 
-        if(hybridcomplexity){
-            openerButtonPressed = false;
-            hybridSortOptions();
-        }
         
         if (bubbleSortbool){
             nSquaredComplexity = false;
@@ -870,14 +911,7 @@ int main() {
             nlognComplexity = false;
             doStartOptions = true;
         }
-        if(timSortbool){
-            hybridcomplexity = false; 
-            doStartOptions = true;
-        }
-        if(introSortbool) {
-            hybridcomplexity = false; 
-            doStartOptions = true;
-        }
+
 
         if (doStartOptions)
             showStartOptions();
