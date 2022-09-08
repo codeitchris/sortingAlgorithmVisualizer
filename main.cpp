@@ -5,6 +5,8 @@
 #include <vector>
 #include <utility>
 
+
+// Global definitions
 #define ScreenWidth 1200
 #define ScreenHeight 800
 
@@ -46,7 +48,7 @@ Color findColor(int pillerState) {
             break;
     }
     }
-    
+//Function declerations so I can use functions anywhere
 void openerbutton(float size, char Bubble_Sort_text[]);
 void opener();
 void button(float x, float y, char *Text, Color color, bool &state);
@@ -79,7 +81,7 @@ void drawarr(std::vector<std::pair<int, int> > arr) {
                         Vector2{barWidth, (float) arr[i].first}, color);
     }
 }
-
+// Bollean declerations, yeah there is ALOT of them, big project!
 bool shouldRND = true;
 bool shldmenue = false;
 bool shldopener = true;
@@ -106,7 +108,7 @@ bool backButtonPressed = false;
 
 
 
-
+// Open screen code
 void opener(){
     float font = (2.5 * GetScreenWidth())/100;
     char opening_text[] = "You want some sorting!?";
@@ -118,6 +120,8 @@ void opener(){
     button(GetScreenWidth()/10 - tmp2, GetScreenHeight()/30, backButton, DARKGRAY, backButtonPressed);    
     drawarr(arr);
 }
+
+//Code for the buttons
 void openerbutton(float size, char Bubble_Sort_text[]){
     Color color;
     if (openerButtonPressed)
@@ -157,7 +161,7 @@ void button(float x, float y, char *Text, Color color, bool &state){
 }
 
 
-
+//Randomizes the array
 void RNDarr(std::vector<std::pair<int, int> >& arr) {
     
     for(int i =0; i<numOfColumn; i++)
@@ -169,7 +173,7 @@ void RNDarr(std::vector<std::pair<int, int> >& arr) {
 }
 
 
-
+//Code to change speed at which we sort
 void speedFunction(char operation, int &value) {
     switch(operation)
     {
@@ -186,7 +190,7 @@ void speedFunction(char operation, int &value) {
     }
     SetTargetFPS(SortingSpeed);
 }
-
+//Changes size of the array
 void ChangeSize(char operation, int &value) {
     switch(operation)
     {
@@ -221,7 +225,7 @@ void ChangeSize(char operation, int &value) {
     }
     drawarr(arr);
 }
-
+// Code for the buttons on starting screen
 void showStartOptions() {
 
     float font = (2.5*GetScreenWidth())/100;
@@ -309,7 +313,7 @@ void showStartOptions() {
 
 
 
-// n^2 complexity
+// n^2 complexity implementations
 
 void bubblesort(std::vector<std::pair<int, int> > &arr){
     bool swapped;
@@ -433,7 +437,7 @@ void insertionsort(std::vector<std::pair<int, int> > &arr){
 
 }
 
-//nlogn
+//nlogn implementations
 
 void merge(std::vector<std::pair<int, int> >& arr, int min, int mid, int max){
     
@@ -690,7 +694,7 @@ void maxHeap(std::vector<std::pair<int, int> >& arr, int n){
 
 }
 
-
+// Code to tell what button was pressed for the type of sorting
 void whichSort(int x, int y) {
     if(x == 0){
         if(y == 0){
@@ -741,7 +745,7 @@ bool nSquaredComplexity = false;
 bool nlognComplexity = false;
 
 
-
+// Buttons for the complexity / type of sorrting used
 
 
 void complexityChoice() {
@@ -859,7 +863,8 @@ int main() {
             complexityChoice();
         }
             
-        
+        // Naviagates through bool's of buttons and triggers
+        //code based on the bool's states.
         if(backButtonPressed){
             openerButtonPressed = false;
             nSquaredComplexity = false;

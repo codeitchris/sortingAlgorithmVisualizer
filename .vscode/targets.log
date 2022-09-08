@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Tue Aug  9 16:10:38 2022
+# Make data base, printed on Thu Aug 25 16:30:01 2022
 
 # Variables
 
@@ -20,6 +20,7 @@ make: *** No rule to make target `all'.  Stop.
 ?F = $(notdir $?)
 # environment
 VSCODE_LOG_NATIVE = false
+ 
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
@@ -41,7 +42,7 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/3f/mf8lz2cj7dn8s2lp755g2cgm0000gn/T/vscode-ipc-c35d834b-b87f-4530-bd0d-a1ecfe4db2ca.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/3f/mf8lz2cj7dn8s2lp755g2cgm0000gn/T/vscode-ipc-23b05d45-203b-45fe-9253-8a4a4394ab70.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -53,7 +54,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.NIrGcrzfXa/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.yxMoFnXstA/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -149,7 +150,7 @@ MAKELEVEL := 0
 # environment
 CONDA_PREFIX = /Users/christophersebastian/opt/anaconda3
 # environment
-VSCODE_PID = 22736
+VSCODE_PID = 90850
 # environment
 _CE_CONDA = 
 # environment
@@ -224,6 +225,6 @@ default:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Aug  9 16:10:38 2022
+# Finished Make data base on Thu Aug 25 16:30:01 2022
 
  
